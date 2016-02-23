@@ -1,0 +1,61 @@
+*{margin:0;padding:0}body{min-height:500px;font:12px/26px Georgia, "Times New Roman",Times,serif;background:#f5f5f5}li{list-style:none}a{text-decoration:none}input,textarea{-webkit-transition:border linear 0.2s, box-shadow linear 0.2s;-moz-transition:border linear 0.2s, box-shadow linear 0.2s;-ms-transition:border linear 0.2s, box-shadow linear 0.2s;-o-transition:border linear 0.2s, box-shadow linear 0.2s;transition:border linear 0.2s, box-shadow linear 0.2s;-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1);box-shadow:inset 0 1px 2px rgba(0,0,0,0.1);border-radius:3px}input:focus,textarea:focus{outline:0;border-color:rgba(82, 168, 236, 0.8);-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82,168,236,0.6)}input{vertical-align:middle}.input{height:18px}.input,textarea,select{background-color:#FFF;border:1px
+solid #CCC;box-shadow:2px 2px 2px #F0F0F0 inset;font-family:inherit;font-size:100%;line-height:18px;padding:4px;margin:0;vertical-align:middle}option{height:16px}.clear{clear:both}.fr{float:right}.line{background:url(/PHP-Amateur_Common_System/Admin/Tpl/Public/Img/x-bg.gif) repeat-x left -310px;height:2px;overflow:hidden;margin:5px
+0px}.hr{background:url(/Public/Img/Bg/hr.png) repeat-x bottom}.btn{margin-right:10px;min-width:80px;background:#1b75b6;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);color:#fff;border:1px
+solid #106bab;border-radius:3px;padding:4px
+5px 4px 10px;display:inline-block;cursor:pointer;font-size:100%;line-height:normal;text-decoration:none;overflow:visible;vertical-align:middle;text-align:center;zoom:1;white-space:nowrap;font-family:inherit;letter-spacing:5px}.loginWeb{background:url(/PHP-Amateur_Common_System/Admin/Tpl/Public/Img/login_body_bg.gif) repeat-x center top}.loginBox{width:900px;height:500px;background:url(/PHP-Amateur_Common_System/Admin/Tpl/Public/Img/login_bg.jpg) no-repeat center 30px;margin:0
+auto;padding-top:135px}.loginBox
+.innerBox{width:456px;height:310px;margin:0px
+auto 5px auto}.loginBox .innerBox
+.logo{height:75px;line-height:75px;padding:10px
+40px 0 40px}.loginBox
+.loginInfo{}.loginBox
+ul{clear:both;margin:0
+40px}.loginBox ul
+li{line-height:50px;height:50px;float:left}.loginBox ul
+li.row1{width:80px;text-align:right;padding-right:10px;font-family:"微软雅黑";font-size:16px;color:#666}.loginBox ul
+li.row2{}.loginBox
+.loginInfo{}.loginBox
+.operation{text-align:center;padding:10px
+0}.tabEvenOdd{border:1px
+solid #ddd;background:#fefefe}.tabEvenOdd
+tr.odd{background:#fff}.tabEvenOdd
+td{padding:3px
+5px;border-top:1px solid #fff;border-bottom:1px solid #ddd}.Item{height:35px;margin-bottom:15px;line-height:35px}.Item
+div{display:inline-block;padding:0
+10px;height:32px}.Item
+div.current{border-bottom:2px solid #266AAE;color:#266AAE;font-weight:700}.table1{border-top:#ddd solid 1px}.table1 tr:hover{background-color:#fafafa}.table1
+th{border-right:1px solid #E5E3E3;font-weight:100;line-height:24px;padding:5px
+10px 7px;text-align:right}.table1
+td{line-height:24px;padding:5px
+10px 7px}.table1
+tr{background:url(/Public/Img/Bg/hr.png) repeat-x bottom}.table2{}.tab{margin:15px
+0;border-width:1px;border-style:solid;border-color:#ddd #ddd #fff #fff;text-shadow:0 1px 0 #FFF;border-collapse:separate}.tab
+td{padding:5px
+10px;margin:15px
+0;line-height:24px;border-width:1px;border-style:solid;border-color:#fff #fff #ddd #ddd}.tab thead
+td{text-align:center}.tab tbody tr:hover{background:#fff}
+/*!----------------------------------------------------------------------------- 
+   AsyncBox default v1.5 - http://asyncui.com/skin - Copyright 2012, Wuxinxi007
+   -----------------------------------------------------------------------------!*/
+body{margin:0;height:100%}asyncui{display:block}.asyncbox{position:absolute;font:12px Tahoma,sans-serif}ab_skins{background:url(/PHP-Amateur_Common_System/Public/Js/asyncbox/skins/default/default_bg.gif)}ab_skins
+ul{background:url(/PHP-Amateur_Common_System/Public/Js/asyncbox/skins/default/default_tb.gif)}ab_clone{border:1px
+dotted #666}table.ab_outer{width:auto;height:auto;border-collapse:collaps}.asyncbox table,.asyncbox td,.asyncbox
+ul{margin:0;padding:0;list-style:none}.ab_border,.ab_close,.ab_footbar a,.ab_footbar
+span{background:url(/PHP-Amateur_Common_System/Public/Js/asyncbox/skins/default/default_bg.gif) no-repeat}.ab_border{opacity:0.9;filter:alpha(opacity=90);font-size:0}.ab_t,.ab_b{height:26px;background:url(/PHP-Amateur_Common_System/Public/Js/asyncbox/skins/default/default_tb.gif) repeat-x}.ab_l div,.ab_r
+div{width:7px}.ab_l,.ab_r{background-repeat:repeat-y}.ab_c{background:#fff}.ab_r{background-position:-8px 0}.ab_b{height:7px;background-position:0 -27px}.ab_lt{background-position:-16px -32px}.ab_rt{background-position:-24px -32px}.ab_rb{background-position:-24px -59px}.ab_lb{background-position:-16px -59px}.ab_title{position:relative;height:26px;margin-top:-26px;color:#15428B;cursor:default;padding-right:20px;overflow:hidden;-moz-user-select:none;font-weight:bold;line-height:26px}.ab_close{position:absolute;top:6px;right:0;width:15px;height:15px;background-position:-16px 0}.ab_close:hover{background-position:-16px -16px}.asyncbox_alert,.asyncbox_confirm,.asyncbox_success,.asyncbox_warning,.asyncbox_error{color:#033;margin:12px;line-height:18px;padding-left:46px;text-align:left}.asyncbox_alert span,.asyncbox_confirm span,.asyncbox_success span,.asyncbox_warning span,.asyncbox_error
+span{width:37px;height:37px;position:absolute;top:36px;left:18px;background:url(/PHP-Amateur_Common_System/Public/Js/asyncbox/skins/default/default_bg.gif) no-repeat -32px 0}.asyncbox_confirm
+span{background-position:-69px 0}.asyncbox_success
+span{background-position:-106px 0}.asyncbox_warning
+span{background-position:-143px 0}.asyncbox_error
+span{background-position:-180px 0}.asyncbox_error{color:#F00}.asyncbox_prompt{color:#033;padding:0
+10px}.asyncbox_prompt
+li{margin-top:8px}.asyncbox_prompt input,.asyncbox_prompt
+textarea{color:#666;padding:2px;border:1px
+solid #84A0C4;font:12px/1.3em Verdana,sans-serif;resize:none}.asyncbox_prompt
+input{height:17px}.ab_footbar{padding:10px
+10px 10px 0;text-align:right}.ab_footbar
+a{margin:0
+0 0 10px;padding:0;display:inline-block;border:none;text-decoration:none;height:22px;cursor:pointer;background-position:-32px -38px}.ab_footbar
+span{background-position:100% -38px;color:#555;padding:3px
+11px 3px 0;margin-left:12px;float:left;height:16px}.ab_footbar a:hover{background-position:-32px -60px;text-decoration:none}.ab_footbar a:hover
+span{color:#000;background-position:100% -60px}

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>代管名单-老师管理-{$site.SITE_INFO.name}</title>
+        <php>
+            $addCss="";
+            $addJs="";
+            $currentNav='老师管理 > 代管学生列表';
+        </php>
+        <include file="Common:intoHead" />
+    </head>
+    <body>
+        <div class="wrap">
+            <include file="Common:head" />
+            <div class="mainBody">
+                <include file="Common:left" />
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">代管学生列表</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                            <thead>
+                                <tr>
+                                    <td>学号</td>
+                                    <td>姓名</td>
+                                    <td>专业</td>
+                                    <td>毕设名</td>
+                                    <td>电话</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="list" id="tab">
+                                    <tr align="center">
+                                        <td align="left">{$tab.stu_id}</td>
+                                        <td><a href="">{$tab.stu_name}</a></td>
+                                        <td>{$tab.stu_major}</td>
+                                        <td></td>
+                                        <td>{$tab.stu_mobile}</td>             
+                                    </tr>
+                                </volist>
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="act" id="act" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            
+        </script>
+    </body>
+</html>
