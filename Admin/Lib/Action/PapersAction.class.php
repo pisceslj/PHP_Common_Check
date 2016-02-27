@@ -3,9 +3,7 @@
 class PapersAction extends CommonAction {
 
     public function index() {
-//            die(".............");
-        $M = M("Papers");
-//        die(".............");
+        $M = M("Papers");  //实例化paper数据库
         $count = $M->count();
         import("ORG.Util.Page");       //载入分页类
         $page = new Page($count, 20);
@@ -39,7 +37,10 @@ class PapersAction extends CommonAction {
             echo json_encode(array("status" => 1, "info" => "可以使用"));
         }
     }
-/****************编辑*********************/
+
+/*
+ *编辑
+ */
     public function edit() {
         $M = M("Papers");
         if (IS_POST) {
@@ -55,7 +56,10 @@ class PapersAction extends CommonAction {
             $this->display("add");
         }
     }
-/**************删除文件记录****************/
+
+/*
+ *删除文件记录
+ */
     public function del() {
         if (M("Papers")->where("id=" . (int) $_GET['id'])->delete()) {
             $this->success("成功删除");
@@ -65,14 +69,28 @@ class PapersAction extends CommonAction {
         }
     }
 
-    public function upload(){
-        $file = M('file');
-        $list = $file->select();
-        $this->assign('list',$list);
-        $this->display();
-    }   
-/**************上传pdf文件**************/
-    public function uploads(){
+/*
+ *上传pdf文件
+ */
+public function upload(){
+    import('ORG.Net.UploadFile');
+    $upload = new UploadFile();//实例化上传类
+    $upload ->maxSize = 3145728;
+    $upload ->allowExts('pdf','jpg','gif','txt');
+    $upload ->savePath = './Uploads/';
+    if($upload->upload()){
+        $this->error($upload->getErrorMsg());
+    }else{
+        $this->success('上传成功！');
+    }
+
+    $User = M("papers");
+    $User ->create();
+    $User ->add();
+    $User ->success('数据保存成功！');
+}
+
+/*public function upload(){
           if(empty($_FILES)){
             $this->error('务必选择上传文件');
           }else{
@@ -87,9 +105,12 @@ class PapersAction extends CommonAction {
                 $this->error('上传文件异常，请与老师联系');
             }
           }
-    }
-    /*********自定义c函数***********/
-    private function c($data){
+    }*/
+
+/*
+ *自定义c函数
+ */
+  /*  private function c($data){
         $file=M('file');
         $num='0';
         for($i=0;$i<count($data)-1;$i++){
@@ -106,9 +127,12 @@ class PapersAction extends CommonAction {
         {
             return false;
         }
-    }
-    /***********自定义up函数***************/
-    private function up(){
+    }*/
+
+/*
+ *自定义up函数
+ */
+/*private function up(){
         import('@.ORG.UploadFile');//将UploadFile.class.php拷到Lib文件夹下
         $upload = new UploadFile();
         $upload->maxSize = '3145728';//默认-1，不限制文件大小
@@ -124,12 +148,15 @@ class PapersAction extends CommonAction {
         }else{
             $this->error($upload->getErrorMsg());//获取上传的错误信息
         }
-    }
-    /**************查看已提交的信息*********************/
-    private function recheck(){
-        if(!function_exists('read_pdf')) {
-              function read_pdf($file) {
-                 if(strtolower(substr(strrchr($file,'.'),1)) != 'pdf') {
+    }*/
+    
+/*
+ *查看已提交的信息
+ */
+private function recheck(){
+    if(!function_exists('read_pdf')) {
+        function read_pdf($file) {
+            if(strtolower(substr(strrchr($file,'.'),1)) != 'pdf') {
                      echo '文件格式不对.';
                      return;
                  }
@@ -142,7 +169,7 @@ class PapersAction extends CommonAction {
               readfile($file);
          }
         }
-        read_pdf('.pdf');
+       // read_pdf('.pdf');
     }
 
 }

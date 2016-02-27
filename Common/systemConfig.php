@@ -5,7 +5,7 @@ return array(
     'AUTH_CODE' => 'Uui575', 
     'ADMIN_AUTH_KEY' => '11@sina.cn', 
     'DB_HOST' => '127.0.0.1', 
-    'DB_NAME' => 'php_check', 
+    'DB_NAME' => 'check', 
     'DB_USER' => 'root', 
     'DB_PWD' => '', 
     'DB_PORT' => '3306', 

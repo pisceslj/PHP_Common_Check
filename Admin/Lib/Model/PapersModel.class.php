@@ -3,24 +3,43 @@
 class PapersModel extends Model {
 
     public function listPapers($firstRow = 0, $listRows = 20) {
-        $M = M("Papers");
+        $stuArr = M("student")->field("`stu_id`,`stu_name`")->select();//选中student表中的stu_id和stu_name
+        foreach($stuArr as $k => $v){
+            $sids[$k][$v['stu_id']] = $v;
+            //$snames[$v['stu_name']] = $v;
+            //dump($v);
+        }
+        dump($sids[0][$v['stu_id']]);//ok
+        unset($stuArr);
+
+        $M = M("papers");
         $list = $M->field("`id`,`title`,`status`,`published`,`cid`,`aid`")->order("`published` DESC")->limit("$firstRow , $listRows")->select();
         $statusArr = array("审核状态", "已发布状态");
+        //dump($list);//ok
+
         $aidArr = M("Admin")->field("`aid`,`email`,`nickname`")->select();
         foreach ($aidArr as $k => $v) {
             $aids[$v['aid']] = $v;
         }
+        //dump($aidArr);//ok
         unset($aidArr);
+        
         $cidArr = M("Category")->field("`cid`,`name`")->select();
         foreach ($cidArr as $k => $v) {
             $cids[$v['cid']] = $v;
         }
+        //dump($cidArr);//ok
+        //dump($cids);
         unset($cidArr);
+        
         foreach ($list as $k => $v) {
-            $list[$k]['aidName'] =$aids[$v['aid']]['nickname'] == '' ? $aids[$v['aid']]['email'] : $aids[$v['aid']]['nickname'];
+            $list[$k]['aidName'] = $aids[$v['aid']]['nickname'] ==''? $aids[$v['aid']]['email'] : $aids[$v['aid']]['nickname'];
             $list[$k]['status'] = $statusArr[$v['status']];
             $list[$k]['cidName'] = $cids[$v['cid']]['name'];
+            $list[$k]['stuId'] =   $sids[$v['stu_id']]['stu_name'];
+            $list[$k]['stuName'] = $snames[$v['stu_name']];
         }
+        dump($list);
         return $list;
     }
 

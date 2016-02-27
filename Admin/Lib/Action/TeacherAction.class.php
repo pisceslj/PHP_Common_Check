@@ -25,10 +25,10 @@ class TeacherAction extends CommonAction {
      *列出代管学生的名单
      */
     public function hosted(){
-        $Stu = D('student')->findall();//实例化pa_student模型
+        //$Stu = D('student')->findall();//实例化pa_student模型
         //$list = $Stu->select();//选中所有数据
         //$this->assign('list',$list);
-        dump($Stu);
+        //dump($Stu);
         //$this->display();
     }
 

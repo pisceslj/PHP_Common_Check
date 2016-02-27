@@ -39,7 +39,7 @@
                     <div class="Item hr">
                         <div class="current">添加编辑论文</div>
                     </div>
-                    <form action="__URL__/upload" method="post" enctype="multipart/form-data">
+                    <form id= "upload" action="__URL__/upload" method="post" enctype="multipart/form-data">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
                             <tr>
                                 <th width="100">文章标题：</th>
@@ -73,7 +73,7 @@
                             </tr>
                             <tr>
                                 <th>上传文件：</th>
-                                <td><input  type="file" style="height:30px;width:150px"><br/></input></td>
+                                <td><input  type="file" style="height:30px;width:350px"><br/></input></td>
                             </tr>
                         </table>
                         <input type="hidden" name="info[id]" value="<?php echo ($info["id"]); ?>" />
