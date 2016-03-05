@@ -52,11 +52,11 @@
                             </thead>
                             <tbody>
                                 <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$tab): $mod = ($i % 2 );++$i;?><tr align="center">
-                                        <td align="left"><?php echo ($tab["stu_id"]); ?></td>
-                                        <td><a href=""><?php echo ($tab["stu_name"]); ?></a></td>
-                                        <td><?php echo ($tab["stu_major"]); ?></td>
-                                        <td></td>
-                                        <td><?php echo ($tab["stu_mobile"]); ?></td>             
+                                        <td><?php echo ($tab["stuId"]); ?></td>
+                                        <td><a href="__URL__/stuInfo.html"><?php echo ($tab["stuName"]); ?></a></td>
+                                        <td><?php echo ($tab["stuMajor"]); ?></td>
+                                        <td><?php echo ($tab["title"]); ?></td>
+                                        <td><?php echo ($tab["stuMobile"]); ?></td>
                                     </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                             </tbody>
                         </table>

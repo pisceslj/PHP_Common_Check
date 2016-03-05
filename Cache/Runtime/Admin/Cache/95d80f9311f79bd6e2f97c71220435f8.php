@@ -2,11 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>添加、编辑论文-后台管理-<?php echo ($site["SITE_INFO"]["name"]); ?></title>
-        <?php $addCss=""; $addJs=""; $currentNav ='论文管理 > 添加编辑论文'; ?>
-        <base href="<?php echo ($site["WEB_ROOT"]); ?>"/>
-<link rel="stylesheet" type="text/css" href="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=../Public/Css/base.css|../Public/Css/layout.css|__PUBLIC__/Js/asyncbox/skins/default.css<?php echo ($addCss); ?>" />
-<script type="text/javascript" src="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=__PUBLIC__/Js/jquery-1.9.0.min.js|__PUBLIC__/Js/jquery.lazyload.js|__PUBLIC__/Js/functions.js|../Public/Js/base.js|__PUBLIC__/Js/jquery.form.js|__PUBLIC__/Js/asyncbox/asyncbox.js<?php echo ($addJs); ?>"></script>
+        <title>数据还原-数据管理-<?php echo ($site["SITE_INFO"]["name"]); ?></title>
+        <?php $addCss=""; $addJs=""; $currentNav ='数据管理 > 数据还原'; ?>
+        <link rel="stylesheet" type="text/css" href="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=../Public/Css/base.css|../Public/Css/layout.css|__PUBLIC__/Js/asyncbox/skins/default.css<?php echo ($addCss); ?>" />
     </head>
     <body>
         <div class="wrap">
@@ -37,54 +35,48 @@
 </div>
                 <div id="Right">
                     <div class="Item hr">
-                        <div class="current">添加编辑论文</div>
+                        <span class="fr">系统库中共有<?php echo ($files); ?>个毕业设计，共计<?php echo ($total); ?></span>
+                        <div class="current">初审任务列表</div>
                     </div>
-                    <form action="__URL__/upload" method="post" enctype="multipart/form-data">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
-                            <tr>
-                                <th width="100">文章标题：</th>
-                                <td><input id="title" type="text" class="input" size="60" name="info[title]" value="<?php echo ($info["title"]); ?>"/> <a href="javascript:void(0)" id="checkPapersTitle">检测是否重复</a></td>
-                            </tr>
-
-                            <tr>
-                                <th width="100">文章发布状态：</th>
-                                <td><label><input type="radio" name="info[status]" value="0" <?php if($info["status"] == 0): ?>checked="checked"<?php endif; ?> /> 文章审核状态</label> &nbsp; <label><input type="radio" name="info[status]" value="1" <?php if($info["status"] == 1): ?>checked="checked"<?php endif; ?> /> 文章已发布状态</label> </td>
-                            </tr>
-                            <tr>
-                                <th>所属分类：</th>
-                                <td>
-                                    <select name="info[cid]">
-                                        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($vo[cid] == $info[cid]): ?><option value="<?php echo ($vo["cid"]); ?>" selected="selected"><?php echo ($vo["fullname"]); ?></option>
-                                                <?php else: ?>
-                                                <option value="<?php echo ($vo["cid"]); ?>"><?php echo ($vo["fullname"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
-                                    </select></td>
-                            </tr>
-                            <tr>
-                                <th>文章关键词：</th>
-                                <td><input type="text" class="input" size="60" name="info[keywords]" value="<?php echo ($info["keywords"]); ?>"/> 多关键词间用半角逗号（,）分开，可用于做文章关联阅读条件</td>
-                            </tr>
-                            <tr>
-                                <th>文章描述：</th>
-                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[description]"><?php echo ($info["description"]); ?></textarea> 用于SEO的description</td>
-                            </tr>
-                            <tr>
-                                <th>文章摘要：</th>
-                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[summary]"><?php echo ($info["summary"]); ?></textarea> 如果不填写则系统自动截取文章前200个字符</td>
-                            </tr>
-                            <tr>
-                                <th>上传文件：</th>
-                                <td><input  type="file" style="height:30px;width:150px"><br/></input></td>
-                            </tr>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                            <thead>
+                                <tr>
+                                    <td>毕业设计</td>
+                                    <td>完成时间</td>
+                                    <td>类型</td>
+                                    <td>文件大小</td>
+                                    <td>文件备注</td>
+                                    <td>审核</td>
+                                    <td width="90"><label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label><input name="" class="unsetAll" type="checkbox"/> 反选</label></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$sql): $mod = ($i % 2 );++$i;?><tr align="center">
+                                        <td><input pre="<?php echo ($sql["pre"]); ?>" type="checkbox" name="sqlFiles[]" value="<?php echo ($sql["name"]); ?>"/></td>
+                                        <td align="left"><a href="<?php echo U('SysData/downFile',array('file'=>$sql['name'],'type'=>'sql'));?>" target="_blank"><?php echo ($sql["name"]); ?></a></td>
+                                        <td><?php echo ($sql["time"]); ?></td>
+                                        <td><?php echo ($sql["type"]); ?></td>
+                                        <td><?php echo ($sql["size"]); ?></td>
+                                        <td class="description" title="<?php echo ($sql["description"]); ?>">查看备注信息</td>
+                                        <td><button class="btn restore" sqlPre="<?php echo ($sql["pre"]); ?>">导入</button></td>
+                                    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                            </tbody>
                         </table>
-                        <input type="hidden" name="info[id]" value="<?php echo ($info["id"]); ?>" />
+                        <input type="hidden" name="to" id="to" value="" />
                     </form>
                     <div class="commonBtnArea" >
-                        <button class="btn submit">提交</button>
+                        <span class="fr" id="opStatus" style="width:450px; display: none; margin: -8px; line-height: 16px;"></span>
+                        <button class="btn delSqlFiles">删除所选</button>
+                        <button class="btn sendSql">发送SQL到邮箱</button>
+                        <button class="btn zip">压缩SQL为ZIP</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="clear"></div>
+        <link rel="stylesheet" type="text/css" href="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=__PUBLIC__/Js/poshytip/tip-yellow/tip-yellow.css|__PUBLIC__/Js/poshytip/tip-yellowsimple/tip-yellowsimple.css" />
+        <script type="text/javascript" src="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=__PUBLIC__/Js/jquery-1.7.2.min.js|__PUBLIC__/Js/jquery.lazyload.js|__PUBLIC__/Js/functions.js|../Public/Js/base.js|__PUBLIC__/Js/jquery.form.js|__PUBLIC__/Js/asyncbox/asyncbox.js|__PUBLIC__/Js/poshytip/jquery.poshytip.min.js"></script>
         <div id="Bottom">© 2015 All rights reserved By <a href="http://www.ss.uestc.edu.cn/" target="_blank">电子科技大学信软学院</a></div>
 <script type="text/javascript">
     $(window).resize(autoSize);
@@ -106,20 +98,134 @@
 </script>
         <script type="text/javascript">
             $(function(){
-                $("#checkPapersTitle").click(function(){ //用Ajax获取Json数据
-                    $.getJSON("__URL__/checkPapersTitle", { title:$("#title").val(),id:"<?php echo ($info["id"]); ?>"}, function(json){
-                        $("#checkPapersTitle").css("color",json.status==1?"#0f0":"#f00").html(json.info);
+                //刷新操作
+                var repeat=function(url,type){
+                    $.post(url, function(json){
+//                        var json = eval("(" + json + ")");
+                        if(json.status==1){
+                            if(json.url){
+                                $("#opStatus").html(json.info);
+                                repeat(json.url,type);
+                            }else{
+                                popup.success(json.info,'oh yeah',function(action){
+                                    if(action == 'ok'){
+                                        $("#opStatus").hide('solw');
+                                        $("."+type).html(type=="sendSql"?"发送SQL到邮箱":"导入");
+                                    }
+                                });
+                                $(".btn").removeAttr("disabledSubmit");
+                            }
+                        }else{
+                            popup.error(json.info);
+                        }
                     });
-                });
-                $(".submit").click(function(){
-                    //alert("提交成功！");
-                    //content.sync();
-                    commonAjaxSubmit();
+                }
+                $(".sendSql").click(function(){
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                        return false;
+                    }
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要发送到邮件中的数据库表吧");
+                        return false;
+                    }
+                    popup.open({id:"ifrSendSql", url : "__URL__/sendSql", width : 400, height : 100, buttons : [{ value : '确定发送邮件',result : 'submit'},{ value : '取消',result : 'cancel'}],callback : function(btnRes,cntWin,reVal){
+                            if(btnRes == "submit"){
+                                var email=cntWin.getEmail();
+                                var Reg =/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+                                if (Reg.test(email)) {
+                                    $("#to").val(email);
+                                    $(".btn").attr("disabledSubmit",true);
+                                    $("form").ajaxSubmit({url:"__URL__/sendSql",type:"POST",success:function(json, st) {
+//                                            var json = eval("(" + json + ")");
+                                            if(json.status==1){
+                                                if(json.url){
+                                                    $("#opStatus").show().html(json.info);
+                                                    repeat(json.url,"sendSql");
+                                                }else{
+                                                    popup.success(json.info);
+                                                }
+                                                popup.close("asyncbox_alert");
+                                            }else{
+                                                popup.error(json.info);
+                                            }
+                                        }
+                                    });
+                                    popup.close("ifrSendSql");
+                                }else{
+                                    popup.error("你输入的电子邮件地址格式错误");
+                                }
+                                return false;
+                            }
+                        }
+                    });
                     return false;
                 });
-                /*$(".upload").click(function(){
-                    //alert("hello");
-                });*/
+                //显示SQL文件说明信息
+                $('.description').poshytip({className: 'tip-yellowsimple', showTimeout: 0.5,alignX: 'center',offsetY: 0,allowTipHover: true});
+                clickCheckbox();//全新反选
+                //同一备份版本任意一个卷选中则选中该卷所有文件
+                $("tbody input[type='checkbox']").click(function(){$("tbody input[type='checkbox'][pre='"+$(this).attr("pre")+"']").prop("checked",$(this).prop('checked'));});
+                //提交数据恢复操作
+                $(".restore").click(function(){
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                        return false;
+                    }
+                    var sqlPre=$(this).attr("sqlPre");
+                    $(".restore[sqlPre='"+sqlPre+"']").attr("disabledSubmit",true).html("导入中...");
+                    $(".btn").attr("disabledSubmit",true);
+                    $.getJSON("__URL__/restoreData", {sqlPre:sqlPre}, function(json){
+                        if(json.status==1){
+                            if(json.url){
+                                $("#opStatus").show().html(json.info);
+                                repeat(json.url,"restore");
+                            }else{
+                                popup.success(json.info);
+                            }
+                            popup.close("asyncbox_alert");
+                        }else{
+                            popup.error(json.info);
+                        }
+                    });
+                    popup.alert("系统处理中，如果导入文件较大可能需要较长时间，请稍候....");
+                    return false;
+                });
+                //删除备份文件
+                $(".delSqlFiles").click(function(){
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                        return false;
+                    }
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要删除的数据库表吧");
+                        return false;
+                    }
+                    popup.confirm('你确定要删除备份文件吗？','温馨提示',function(action){
+                        if(action == 'ok'){
+                            $(".btn").attr("disabledSubmit",true);
+                            $(this).html("提交处理中...");
+                            commonAjaxSubmit("__URL__/delSqlFiles");
+                        }
+                    });
+                    return false;
+                });
+
+                //删除备份文件
+                $(".zip").click(function(){
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                        return false;
+                    }
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要压缩的数据库表吧");
+                        return false;
+                    }
+                    commonAjaxSubmit("__URL__/zipSql");
+                    $(".btn").attr("disabledSubmit",true);
+                    $(this).html("压缩中...");
+                    return false;
+                });
             });
         </script>
     </body>

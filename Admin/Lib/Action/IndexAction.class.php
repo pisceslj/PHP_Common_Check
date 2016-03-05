@@ -4,6 +4,14 @@ class IndexAction extends CommonAction {
 
     public function index() {
         
+         $M = M("Papers");
+//        die(".............");
+        $count = $M->count();
+        import("ORG.Util.Page");       //载入分页类
+        $page = new Page($count, 20);
+        $showPage = $page->show();
+        $this->assign("page", $showPage);
+        $this->assign("list", D("Papers")->listPapers($page->firstRow, $page->listRows));
         $this->display();
     }
 

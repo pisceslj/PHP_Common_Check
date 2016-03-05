@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>添加、编辑论文-后台管理-{$site.SITE_INFO.name}</title>
+        <title>数据压缩包管理-数据管理-后台管理-{$site.SITE_INFO.name}</title>
         <php>
             $addCss="";
             $addJs="";
-            $currentNav ='论文管理 > 添加编辑论文';
+            $currentNav ='数据管理 > 数据压缩包管理';
         </php>
-        <include file="Common:intoHead" />
+        <css href="{$site.WEB_ROOT}Public/Min/?f=../Public/Css/base.css|../Public/Css/layout.css|__PUBLIC__/Js/asyncbox/skins/default.css{$addCss}"/>
     </head>
     <body>
         <div class="wrap">
@@ -17,75 +17,144 @@
                 <include file="Common:left" />
                 <div id="Right">
                     <div class="Item hr">
-                        <div class="current">添加编辑论文</div>
+                        <span class="fr">共有{$files}个压缩包文件，共计{$total}</span>
+                        <div class="current">数据库压缩包文件列表</div>
                     </div>
-                    <form action="__URL__/upload" method="post" enctype="multipart/form-data">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
-                            <tr>
-                                <th width="100">文章标题：</th>
-                                <td><input id="title" type="text" class="input" size="60" name="info[title]" value="{$info.title}"/> <a href="javascript:void(0)" id="checkPapersTitle">检测是否重复</a></td>
-                            </tr>
-
-                            <tr>
-                                <th width="100">文章发布状态：</th>
-                                <td><label><input type="radio" name="info[status]" value="0" <if condition="$info.status eq 0"> checked="checked"</if> /> 文章审核状态</label> &nbsp; <label><input type="radio" name="info[status]" value="1" <if condition="$info.status eq 1"> checked="checked"</if> /> 文章已发布状态</label> </td>
-                            </tr>
-                            <tr>
-                                <th>所属分类：</th>
-                                <td>
-                                    <select name="info[cid]">
-                                        <volist name="list" id="vo" width="50px">
-                                            <if condition="$vo[cid] eq $info[cid]">
-                                                <option value="{$vo.cid}" selected="selected">{$vo.fullname}</option>
-                                                <else/>
-                                                <option value="{$vo.cid}">{$vo.fullname}</option>
-                                            </if>
-                                        </volist>
-                                    </select></td>
-                            </tr>
-                            <tr>
-                                <th>文章关键词：</th>
-                                <td><input type="text" class="input" size="60" name="info[keywords]" value="{$info.keywords}"/> 多关键词间用半角逗号（,）分开，可用于做文章关联阅读条件</td>
-                            </tr>
-                            <tr>
-                                <th>文章描述：</th>
-                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[description]">{$info.description}</textarea> 用于SEO的description</td>
-                            </tr>
-                            <tr>
-                                <th>文章摘要：</th>
-                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[summary]">{$info.summary}</textarea> 如果不填写则系统自动截取文章前200个字符</td>
-                            </tr>
-                            <tr>
-                                <th>上传文件：</th>
-                                <td><input  type="file" style="height:30px;width:150px"><br/></input></td>
-                            </tr>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                            <thead>
+                                <tr>
+                                    <td width="90"><label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label><input name="" class="unsetAll" type="checkbox"/> 反选</label></td>
+                                    <td>压缩包名称</td>
+                                    <td>打包时间</td>
+                                    <td>文件大小</td>
+                                    <td>解压</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="list" id="zip">
+                                    <tr align="center">
+                                        <td><input type="checkbox" name="zipFiles[]" value="{$zip.file}"/></td>
+                                        <td align="left"><a href="{:U('SysData/downFile',array('file'=>$zip['file'],'type'=>'zip'))}" target="_blank">{$zip.file}</a></td>
+                                        <td>{$zip.time}</td>
+                                        <td>{$zip.size}</td>
+                                        <td><button class="btn unzip" file="{$zip.file}">解压</button></td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                            <tfoot align="center">
+                                <tr>
+                                    <td width="90"><label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label><input name="" class="unsetAll" type="checkbox"/> 反选</label></td>
+                                    <td>压缩包名称</td>
+                                    <td>备份时间</td>
+                                    <td>总计：{$total}</td>
+                                    <td>解压</td>
+                                </tr>
+                            </tfoot>
                         </table>
-                        <input type="hidden" name="info[id]" value="{$info.id}" />
                     </form>
                     <div class="commonBtnArea" >
-                        <button class="btn submit">提交</button>
+                        <span class="fr" id="opStatus" style="width:450px; display: none; margin: -8px; line-height: 16px;"></span>
+                        <button class="btn delZipFiles">删除所选</button>
+                        <button class="btn unzipSelect">解压缩所选</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="clear"></div>
+        <js href="{$site.WEB_ROOT}Public/Min/?f=__PUBLIC__/Js/jquery-1.7.2.min.js|__PUBLIC__/Js/jquery.lazyload.js|__PUBLIC__/Js/functions.js|../Public/Js/base.js|__PUBLIC__/Js/jquery.form.js|__PUBLIC__/Js/asyncbox/asyncbox.js"/>
         <include file="Common:foot" />
         <script type="text/javascript">
             $(function(){
-                $("#checkPapersTitle").click(function(){ //用Ajax获取Json数据
-                    $.getJSON("__URL__/checkPapersTitle", { title:$("#title").val(),id:"{$info.id}"}, function(json){
-                        $("#checkPapersTitle").css("color",json.status==1?"#0f0":"#f00").html(json.info);
+                //全新反选
+                clickCheckbox();
+
+                var repeat=function(url){
+                    $.post(url, function(json){
+//                        var json = eval("(" + json + ")");
+                        if(json.status==1){
+                            if(json.url){
+                                $("#opStatus").html(json.info);
+                                repeat(json.url);
+                            }else{
+                                popup.success(json.info,'oh yeah',function(action){
+                                    if(action == 'ok'){
+                                        $("#opStatus").hide('solw');
+                                        $(".unzipSelect").html('解压缩所选');
+                                    }
+                                });
+                                $(".btn").removeAttr("disabledSubmit");
+                            }
+                        }else{
+                            popup.error(json.info);
+                        }
                     });
-                });
-                $(".submit").click(function(){
-                    //alert("提交成功！");
-                    //content.sync();
-                    commonAjaxSubmit();
+                }
+
+                $(".unzipSelect").click(function(){
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                        return false;
+                    }
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要删除的数据库表吧");
+                        return false;
+                    }
+                    var files=[];
+                    $("tbody input[type='checkbox'][name='zipFiles[]']:checked").each(function(i){
+                        files[i]=$(this).val();
+                    });
+                    $.post("__URL__/unzipSqlfile", {'zipFiles':files}, function(json){
+//                        var json = eval("(" + json + ")");
+                        if(json.status==1){
+                            if(json.url){
+                                $("#opStatus").show().html(json.info);
+                                repeat(json.url);
+                            }else{
+                                popup.success(json.info);
+                            }
+                            popup.close("asyncbox_alert");
+                        }else{
+                            popup.error(json.info);
+                        }
+                    });
+
                     return false;
                 });
-                /*$(".upload").click(function(){
-                    //alert("hello");
-                });*/
+
+
+                $(".unzip").click(function(){
+                    $.post("__URL__/unzipSqlfile",{'zipFiles[]':$(this).attr("file")},function(json){
+//                        var json = eval("(" + json + ")");
+                        json.status==1?popup.success(json.info):popup.error(json.info);
+                        $(".btn").removeAttr("disabledSubmit");
+                        if(json.url&&json.url!=''){
+                            setTimeout(function(){
+                                top.window.location.href=json.url;
+                            },2000);
+                        }
+                    });
+                    return false;
+                });
+                //删除备份文件
+                $(".delZipFiles").click(function(){
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+
+                    }
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要删除的zip文件吧");
+                        return false;
+                    }
+                    popup.confirm('你确定要删除备份文件吗？','温馨提示',function(action){
+                        if(action == 'ok'){
+                            $(".btn").attr("disabledSubmit",true);
+                            $(this).html("提交处理中...");
+                            commonAjaxSubmit("__URL__/delZipFiles");
+                        }
+                    });
+                    return false;
+                });
             });
         </script>
     </body>

@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>后台管理首页-<?php echo ($site["SITE_INFO"]["name"]); ?></title>
-        <?php $addCss=""; $addJs=""; $currentNav ='网站管理 > 系统信息'; ?>
+        <title>信息管理-<?php echo ($site["SITE_INFO"]["name"]); ?></title>
+        <?php $addCss=""; $addJs=""; $currentNav ='网站管理 > 信息列表'; ?>
         <base href="<?php echo ($site["WEB_ROOT"]); ?>"/>
 <link rel="stylesheet" type="text/css" href="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=../Public/Css/base.css|../Public/Css/layout.css|__PUBLIC__/Js/asyncbox/skins/default.css<?php echo ($addCss); ?>" />
 <script type="text/javascript" src="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=__PUBLIC__/Js/jquery-1.9.0.min.js|__PUBLIC__/Js/jquery.lazyload.js|__PUBLIC__/Js/functions.js|../Public/Js/base.js|__PUBLIC__/Js/jquery.form.js|__PUBLIC__/Js/asyncbox/asyncbox.js<?php echo ($addJs); ?>"></script>
@@ -37,10 +37,31 @@
 </div>
                 <div id="Right">
                     <div class="Item hr">
-                        <div class="current">论文提交信息</div>
+                        <div class="current">信息列表</div>
                     </div>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
-                        <!--这里是显示已经审核通过的论文信息，留待完善代码-->   
+                        <thead>
+                            <tr>
+                                <td>学号</td>
+                                <td>姓名</td>
+                                <td>论文标题</td>
+                                <td>所在分类</td>
+                                <td>状态</td>
+                                <td>指导教师</td>
+                                <td>发布时间</td>
+                                
+                            </tr>
+                        </thead>
+                        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr align="center" id="<?php echo ($vo["id"]); ?>">
+                                <td><?php echo ($vo["stuId"]); ?></td>
+                                <td><?php echo ($vo["stuName"]); ?></td>
+                                <td><?php echo ($vo["title"]); ?></td>
+                                <td><?php echo ($vo["cidName"]); ?></td>
+                                <td><?php echo ($vo["status"]); ?></td>
+                                <td><?php echo ($vo["teacher"]); ?></td>
+                                <td><?php echo (date("Y-m-d H:i:s",$vo["published"])); ?></td>
+                                
+                            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                     </table>
                 </div>
             </div>
@@ -65,15 +86,8 @@
     });
 
 </script>
-
-        <!--script type="text/javascript">
-            $(function(){
-                $.post("<?php echo U('SysData/backup');?>", { systemBackup: 1 },function(json){
-                    if(json.status==1){
-                        popup.success(json.info,"系统定期备份成功提醒");
-                    }
-                });
-            });
-        </script-->
+        <script type="text/javascript">
+            
+        </script>
     </body>
 </html>

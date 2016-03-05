@@ -5,13 +5,13 @@ $DB_PREFIX = $config_arr1['DB_PREFIX'];
 $config_arr2 = array(
     'admin_big_menu' => array(
         'Index' => '首页',
-        'Papers' => '学生管理',
-        'Teacher' => '老师管理',
+        'Papers' => '学生',
+        'Teacher' => '老师',
         'Access' => '管理员',
     ),
     'admin_sub_menu' => array(
         'Common' => array(
-            'Index/myInfo' => '修改密码',
+            'Index/index' => '动态信息',
             'Index/cache' => '缓存清理',
         ),
         'Webinfo' => array(
@@ -20,8 +20,8 @@ $config_arr2 = array(
             'setSafeConfig' => '安全配置'
         ),
         'Papers' => array(
-            'index' => '论文列表',
-            'add' => '发布论文',
+            'index' => '上传毕设',
+            'add' => '信息修改',
         ),
         'Teacher' => array(
             'index' =>'毕设详情',
@@ -35,6 +35,7 @@ $config_arr2 = array(
             'showStudent' => '统计汇总',
             'administrator' => '任务分配',
             'teacher_information' => '代管学生列表',
+            
             'nodeList' => '节点管理',
             'roleList' => '角色管理',
             'addAdmin' => '添加管理员',

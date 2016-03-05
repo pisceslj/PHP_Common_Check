@@ -33,11 +33,11 @@
                         </thead>
                         <volist name="list" id="vo">
                             <tr align="center" id="{$vo.id}">
-                                <td align="left">{$vo.title}</td>
+                                <td>{$vo.title}</td>
                                 <td>{$vo.cidName}</td>
                                 <td>{$vo.status}</td>
                                 <td>{$vo.published|date="Y-m-d H:i:s",###}</td>
-                                <td>{$vo.aidName}</td>
+                                <td>{$vo.teacher}</td>
                                 <td>[ <a href="__URL__/edit?id={$vo.id}">编辑 </a> ] [ <a link="{:U('Papers/del/',array('id'=>$vo['id']))}" href="javascript:void(0)" name="{$vo.title}" class="del">删除 </a> ]</td>
                             </tr>
                         </volist>

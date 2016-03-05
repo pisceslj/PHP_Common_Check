@@ -52,11 +52,11 @@
                             </tr>
                         </thead>
                         <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr align="center" id="<?php echo ($vo["id"]); ?>">
-                                <td align="left"><?php echo ($vo["title"]); ?></td>
+                                <td><?php echo ($vo["title"]); ?></td>
                                 <td><?php echo ($vo["cidName"]); ?></td>
                                 <td><?php echo ($vo["status"]); ?></td>
                                 <td><?php echo (date("Y-m-d H:i:s",$vo["published"])); ?></td>
-                                <td><?php echo ($vo["aidName"]); ?></td>
+                                <td><?php echo ($vo["teacher"]); ?></td>
                                 <td>[ <a href="__URL__/edit?id=<?php echo ($vo["id"]); ?>">编辑 </a> ] [ <a link="<?php echo U('Papers/del/',array('id'=>$vo['id']));?>" href="javascript:void(0)" name="<?php echo ($vo["title"]); ?>" class="del">删除 </a> ]</td>
                             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                     </table>

@@ -1,16 +1,15 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>添加、编辑论文-后台管理-<?php echo ($site["SITE_INFO"]["name"]); ?></title>
-        <?php $addCss=""; $addJs=""; $currentNav ='论文管理 > 添加编辑论文'; ?>
-        <base href="<?php echo ($site["WEB_ROOT"]); ?>"/>
+        <meta charset="utf-8">
+        <title>修改账号密码-系统设置-<?php echo ($site["SITE_INFO"]["name"]); ?></title>
+    <base href="<?php echo ($site["WEB_ROOT"]); ?>"/>
 <link rel="stylesheet" type="text/css" href="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=../Public/Css/base.css|../Public/Css/layout.css|__PUBLIC__/Js/asyncbox/skins/default.css<?php echo ($addCss); ?>" />
 <script type="text/javascript" src="<?php echo ($site["WEB_ROOT"]); ?>Public/Min/?f=__PUBLIC__/Js/jquery-1.9.0.min.js|__PUBLIC__/Js/jquery.lazyload.js|__PUBLIC__/Js/functions.js|../Public/Js/base.js|__PUBLIC__/Js/jquery.form.js|__PUBLIC__/Js/asyncbox/asyncbox.js<?php echo ($addJs); ?>"></script>
-    </head>
-    <body>
-        <div class="wrap">
-            <div id="Top">
+        <?php $addCss=""; $addJs=""; $currentNav ='网站管理 > 修改密码'; ?>
+</head>
+<body>
+    <div class="wrap"> <div id="Top">
     <div class="logo"><a href="<?php echo ($site["WEB_ROOT"]); ?>"><img src="../Public/Img/logo.png" /></a></div>
     <div class="help"><a href="#">使用帮助</a><span><a href="#">关于</a></span></div>
     <div class="menu">
@@ -25,8 +24,7 @@
     </div>
 </div>
 <div class="clear"></div>
-            <div class="mainBody">
-                <div id="Left">
+        <div class="mainBody"> <div id="Left">
     <div id="control" class=""></div>
     <div class="subMenuList">
         <div class="itemTitle"><?php if(MODULE_NAME == 'Index'): ?>常用操作<?php else: ?>子菜单<?php endif; ?> </div>
@@ -35,48 +33,33 @@
         </ul>
     </div>
 </div>
-                <div id="Right">
+            <div id="Right">
+                <div class="contentArea">
                     <div class="Item hr">
-                        <div class="current">添加编辑论文</div>
+                        <div class="current">修改账号密码</div>
                     </div>
-                    <form id= "upload" action="__URL__/upload" method="post" enctype="multipart/form-data">
+                    <form action="" method="post">
+
+                        
+
                         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
                             <tr>
-                                <th width="100">文章标题：</th>
-                                <td><input id="title" type="text" class="input" size="60" name="info[title]" value="<?php echo ($info["title"]); ?>"/> <a href="javascript:void(0)" id="checkPapersTitle">检测是否重复</a></td>
-                            </tr>
-
-                            <!--tr>
-                                <th width="100">文章发布状态：</th>
-                                <td><label><input type="radio" name="info[status]" value="0" <?php if($info["status"] == 0): ?>checked="checked"<?php endif; ?> /> 文章审核状态</label> &nbsp; <label><input type="radio" name="info[status]" value="1" <?php if($info["status"] == 1): ?>checked="checked"<?php endif; ?> /> 文章已发布状态</label> </td>
-                            </tr-->
-                            <tr>
-                                <th>所属分类：</th>
-                                <td>
-                                    <select name="info[cid]">
-                                        <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i; if($vo[cid] == $info[cid]): ?><option value="<?php echo ($vo["cid"]); ?>" selected="selected"><?php echo ($vo["fullname"]); ?></option>
-                                                <?php else: ?>
-                                                <option value="<?php echo ($vo["cid"]); ?>"><?php echo ($vo["fullname"]); ?></option><?php endif; endforeach; endif; else: echo "" ;endif; ?>
-                                    </select></td>
+                                <th width="120">当前账号：</th>
+                                <td><input disabled="disabled" name="email" type="text" class="input" size="40" value="<?php echo ($my_info["email"]); ?>" /></td>
                             </tr>
                             <tr>
-                                <th>文章关键词：</th>
-                                <td><input type="text" class="input" size="60" name="info[keywords]" value="<?php echo ($info["keywords"]); ?>"/> 多关键词间用半角逗号（,）分开，可用于做文章关联阅读条件</td>
+                                <th>现密码：</th>
+                                <td><input class="input" name="pwd0" type="password" size="40" value="" /></td>
                             </tr>
                             <tr>
-                                <th>文章描述：</th>
-                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[description]"><?php echo ($info["description"]); ?></textarea> 用于SEO的description</td>
+                                <th>新密码：</th>
+                                <td><input class="input" name="pwd" type="password" size="40" value="" /></td>
                             </tr>
                             <tr>
-                                <th>文章摘要：</th>
-                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[summary]"><?php echo ($info["summary"]); ?></textarea> 如果不填写则系统自动截取文章前200个字符</td>
-                            </tr>
-                            <tr>
-                                <th>上传文件：</th>
-                                <td><input  type="file" style="height:30px;width:350px"><br/></input></td>
+                                <th>确认密码：</th>
+                                <td><input class="input" name="pwd1" type="password" size="40" value="" /></td>
                             </tr>
                         </table>
-                        <input type="hidden" name="info[id]" value="<?php echo ($info["id"]); ?>" />
                     </form>
                     <div class="commonBtnArea" >
                         <button class="btn submit">提交</button>
@@ -84,8 +67,9 @@
                 </div>
             </div>
         </div>
-        <div class="clear"></div>
-        <div id="Bottom">© 2015 All rights reserved By <a href="http://www.ss.uestc.edu.cn/" target="_blank">电子科技大学信软学院</a></div>
+    </div>
+    <div class="clear"></div>
+<div id="Bottom">© 2015 All rights reserved By <a href="http://www.ss.uestc.edu.cn/" target="_blank">电子科技大学信软学院</a></div>
 <script type="text/javascript">
     $(window).resize(autoSize);
     $(function(){
@@ -104,23 +88,23 @@
     });
 
 </script>
-        <script type="text/javascript">
-            $(function(){
-                $("#checkPapersTitle").click(function(){ //用Ajax获取Json数据
-                    $.getJSON("__URL__/checkPapersTitle", { title:$("#title").val(),id:"<?php echo ($info["id"]); ?>"}, function(json){
-                        $("#checkPapersTitle").css("color",json.status==1?"#0f0":"#f00").html(json.info);
-                    });
-                });
-                $(".submit").click(function(){
-                    //alert("提交成功！");
-                    //content.sync();
-                    commonAjaxSubmit();
-                    return false;
-                });
-                /*$(".upload").click(function(){
-                    //alert("hello");
-                });*/
-            });
-        </script>
-    </body>
+<script src="__PUBLIC__/Js/date-time/bootstrap-datepicker.js"></script>>
+<script type="text/javascript">
+    $(".submit").click(function(){
+        if($.trim($("input[name='pwd0']").val())==''){
+            popup.alert("旧密码不能为空");
+            return false;
+        }
+        if($.trim($("input[name='pwd']").val())==''){
+            popup.alert("新密码不能为空");
+            return false;
+        }
+        if($.trim($("input[name='pwd1']").val())==''){
+            popup.alert("请再次输入确认你的密码");
+            return false;
+        }
+        commonAjaxSubmit();
+    });
+</script>
+</body>
 </html>

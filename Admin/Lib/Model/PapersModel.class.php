@@ -3,17 +3,15 @@
 class PapersModel extends Model {
 
     public function listPapers($firstRow = 0, $listRows = 20) {
-        $stuArr = M("student")->field("`stu_id`,`stu_name`")->select();//选中student表中的stu_id和stu_name
+        $stuArr = M("student")->field("`id`,`stu_id`,`stu_name`,`stu_major`,`stu_mobile`")->select();//选中student表中的stu_id和stu_name
         foreach($stuArr as $k => $v){
-            $sids[$k][$v['stu_id']] = $v;
-            //$snames[$v['stu_name']] = $v;
-            //dump($v);
+            $sids[$v['id']] = $v;
         }
-        dump($sids[0][$v['stu_id']]);//ok
+        //dump($sids);//ok
         unset($stuArr);
 
         $M = M("papers");
-        $list = $M->field("`id`,`title`,`status`,`published`,`cid`,`aid`")->order("`published` DESC")->limit("$firstRow , $listRows")->select();
+        $list = $M->field("`id`,`title`,`status`,`published`,`cid`,`aid`,`teacher`")->order("`published` DESC")->limit("$firstRow , $listRows")->select();
         $statusArr = array("审核状态", "已发布状态");
         //dump($list);//ok
 
@@ -22,6 +20,7 @@ class PapersModel extends Model {
             $aids[$v['aid']] = $v;
         }
         //dump($aidArr);//ok
+        //dump($aids);
         unset($aidArr);
         
         $cidArr = M("Category")->field("`cid`,`name`")->select();
@@ -33,17 +32,20 @@ class PapersModel extends Model {
         unset($cidArr);
         
         foreach ($list as $k => $v) {
-            $list[$k]['aidName'] = $aids[$v['aid']]['nickname'] ==''? $aids[$v['aid']]['email'] : $aids[$v['aid']]['nickname'];
+            $list[$k]['aidName'] = $aids[$v['aid']]['nickname'] ==' '? $aids[$v['aid']]['email'] : $aids[$v['aid']]['nickname'];
             $list[$k]['status'] = $statusArr[$v['status']];
             $list[$k]['cidName'] = $cids[$v['cid']]['name'];
-            $list[$k]['stuId'] =   $sids[$v['stu_id']]['stu_name'];
-            $list[$k]['stuName'] = $snames[$v['stu_name']];
+            $list[$k]['stuId'] =   $sids[$v['id']]['stu_id'];
+            $list[$k]['stuName'] = $sids[$v['id']]['stu_name'];
+            $list[$k]['stuMajor'] = $sids[$v['id']]['stu_major'];
+            $list[$k]['stuMobile'] = $sids[$v['id']]['stu_mobile'];
         }
-        dump($list);
+        //dump($list);
         return $list;
     }
 
     
+
     public function addPapers() {
         $M = M("Papers");
         $data = $_POST['info'];

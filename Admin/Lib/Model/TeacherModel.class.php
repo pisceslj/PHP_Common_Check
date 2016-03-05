@@ -37,17 +37,6 @@ class TeacherModel extends Model {
         }
     }
 
-/*
- *显示代管学生基本信息
- */
-    public function findall(){
-          $sql = 'SELECT * FROM pa_student';
-          return $this->query($sql);
-    }
-
-
 }
-
-
 
 ?>
