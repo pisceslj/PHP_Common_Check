@@ -4,10 +4,11 @@
 |--ThinkPHP : ThinkPHP 核心框架包
 |
 |--Admin 
-|     |--Lib
+|     |--Lib : 系统核心基类库目录
 |          |--Action
 |          |--Module
-|     |--Tpl
+|     |--Tpl ：各页面HTML文件
+|     |--Conf: 配置文件
 |
 |--Common   ：公用函数及类库文件存放目录
 |     |--Functions ：公用函数文件存放目录
@@ -18,6 +19,7 @@
 |     |--systemConfig.php:用于存放网站配置信息等公用信息
 |
 |--Uploads  : 文件上传存放目录
+|     |--PNG : 图片存放目录
 |
 |--Public   : 公用前台文件目录
 |     |--Css       : 公用的CSS样式存放目录
@@ -25,13 +27,9 @@
 |     |--Js        ：公用JS存放目录
 |
 |--Cache    : 临时文件存放目录
-|     |--Htmls     ：生成的html静态页面存放目录
-|     |--MinFiles  :minify合并压缩缓存文件存放目录
-|
 |
 |--index.php ：前台入口文件
-|
-|--.htaccess : URL重写规则文件
+
 
 
 
